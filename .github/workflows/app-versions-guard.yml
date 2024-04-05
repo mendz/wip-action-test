@@ -15,6 +15,6 @@ jobs:
 
     steps:
     - name: Block if the versions are not matched
-      run: npm run ../scripts/versions/app-version-check.mjs
+      run: node ../scripts/versions/app-version-check.mjs
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
