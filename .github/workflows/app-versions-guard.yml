@@ -1,0 +1,20 @@
+name: App version Guard
+
+on:
+  pull_request:
+    branches: [ "master" ]
+    types: [opened, edited, synchronize, reopened]
+
+   # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  check_versions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+    - name: Block if the versions are not matched
+      run: npm run ../scripts/versions/app-version-check.mjs
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
