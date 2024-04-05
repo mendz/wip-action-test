@@ -12,11 +12,13 @@ jobs:
   check_versions:
     runs-on: ubuntu-latest
     timeout-minutes: 2
-
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '20'
     - name: Block if the versions are not matched
-      run: node ./scripts/versions/app-version-check.mjs
+      run: |
+        node ./scripts/versions/index.mjs
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
