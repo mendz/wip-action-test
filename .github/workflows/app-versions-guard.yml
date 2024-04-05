@@ -17,6 +17,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Block if the versions are not matched
-      run: node ../scripts/versions/app-version-check.mjs
+      run: node ./scripts/versions/app-version-check.mjs
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
