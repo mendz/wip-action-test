@@ -19,6 +19,6 @@ jobs:
         node-version: '20'
     - name: Block if the versions are not matched
       run: |
-        node ./scripts/versions/index.mjs
+        node ./scripts/index.mjs
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
