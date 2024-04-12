@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Block if the versions are not matched (check with node)
       run: |
-        changed_files=$(git diff --name-only HEAD^ HEAD)
+        changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})
         echo $changed_files
         node ./scripts/index.mjs $changed_files
       env:
