@@ -4,10 +4,7 @@ on:
   pull_request:
     branches: [ "main", "master" ]
     types: [opened, edited, synchronize, reopened]
-    paths:
-      - './package.json'
 
-   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -15,9 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-    - uses: actions/checkout@v4
-    - name: Block if the versions are not matched
-      run: |
-        node ./scripts/index.mjs
-      env:
+      - uses: actions/checkout@v4
+      - name: Check if package.json is modified
+        id: check-package-json
+        run: |
+          changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})
+          if echo "$changed_files" | grep -q 'package.json'; then
+            echo "package.json was modified. Proceeding with further steps."
+            node ./scripts/index.mjs
+          else
+            echo "No changes to package.json. Skipping further steps."
+          fi
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
