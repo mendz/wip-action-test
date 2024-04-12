@@ -13,8 +13,6 @@ jobs:
     timeout-minutes: 2
     steps:
     - uses: actions/checkout@v4
-      with:
-        fetch-depth: 2
     - name: Block if the versions are not matched
       run: |
         changed_files=$(git diff --name-only HEAD^ HEAD)
