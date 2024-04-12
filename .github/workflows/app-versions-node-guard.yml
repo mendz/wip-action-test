@@ -1,0 +1,22 @@
+name: App version Guard
+
+on:
+  pull_request:
+    branches: [ "main", "master" ]
+    types: [opened, edited, synchronize, reopened]
+
+  workflow_dispatch:
+
+jobs:
+  check_versions_node:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+    - uses: actions/checkout@v4
+    - name: Block if the versions are not matched (check with node)
+      run: |
+        changed_files=$(git diff --name-only HEAD^ HEAD)
+        echo $changed_files
+        node ./scripts/index.mjs $changed_files
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

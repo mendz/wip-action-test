@@ -2,6 +2,13 @@ import fs from 'fs/promises';
 
 console.log('Hello 👋🏼');
 
+// get passed arguments
+const args = process.argv.slice(2);
+
+if (args) {
+    console.log("🚀 ~ args:", args);
+}
+
 // get the first file version
 const firstVersion = JSON.parse(await fs.readFile('./src/file1.json', 'utf-8'))?.version;
 console.log("🚀 ~ firstVersion:", firstVersion);
