@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Block if the versions are not matched
       run: |
-        changed_files=$(git diff --name-only HEAD^ HEAD)
+        changed_files=$(git diff --name-only main)
         echo $changed_files
         if echo "$changed_files" | grep -q 'package.json'; then
           echo "package.json was modified. Proceeding with further steps."
