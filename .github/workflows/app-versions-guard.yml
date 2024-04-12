@@ -18,6 +18,7 @@ jobs:
     - name: Block if the versions are not matched
       run: |
         changed_files=$(git diff --name-only HEAD^ HEAD)
+        echo $changed_files
         if echo "$changed_files" | grep -q 'package.json'; then
           echo "package.json was modified. Proceeding with further steps."
           node ./scripts/index.mjs
