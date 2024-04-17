@@ -1,0 +1,29 @@
+name: App version Guard
+
+on:
+  pull_request:
+    branches: [ "main", "master" ]
+    types: [opened, edited, synchronize, reopened]
+
+  workflow_dispatch:
+
+jobs:
+  check_versions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+    - name: Block if the versions are not matched
+      run: |
+        changed_files=$(git diff --name-only HEAD^ HEAD --diff-filter=M )
+        echo $changed_files
+        if echo "$changed_files" | grep -q -e 'package.json' -e 'file2.json'; then
+          echo "package.json was modified. Proceeding with further steps."
+          node ./scripts/index.mjs
+        else
+          echo "No changes to package.json. Skipping further steps."
+        fi
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

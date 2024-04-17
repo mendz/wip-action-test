@@ -1,0 +1,18 @@
+{
+    "person": {
+      "first_name": "Michael",
+      "last_name": "Johnson",
+      "age": 35,
+      "contact": {
+        "email": "michael@example.com",
+        "phone": "123-456-7890"
+      }
+    },
+    "location": {
+      "address": "789 Oak St",
+      "city": "Smalltown",
+      "state": "Tinyville",
+      "zipcode": "98765"
+    },
+    "version": "1.0.0"
+  }

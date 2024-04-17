@@ -1,0 +1,12 @@
+{
+    "name": "Jane Smith",
+    "age": 25,
+    "email": "janesmith@example.com",
+    "address": {
+      "street": "456 Elm St",
+      "city": "Sometown",
+      "state": "Somestate",
+      "zip": "54321"
+    },
+    "version": "1.0.1"
+  }
